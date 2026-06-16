@@ -27,5 +27,4 @@ live directly under `performance/`.
 
 | Question | Notebook |
 |----------|----------|
-| How do I do a quick look at memory usage for optimising with Dask? | [dask/memory_usage.ipynb](dask/memory_usage.ipynb) |
-| How should I compare performance across execution backends? | Contributions welcome |
+| How should I choose between pyspark and dask? | |

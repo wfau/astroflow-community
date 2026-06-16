@@ -36,9 +36,11 @@ notebook or example that answers it.
 ├── performance/
 │   ├── README.md
 │   ├── dask/
+│   │   ├── code_on_workers.ipynb
 │   │   ├── README.md
 │   │   └── memory_usage.ipynb
 │   └── pyspark/
+│       ├── code_on_workers.ipynb
 │       └── README.md
 ├── science/
 │   └── README.md
@@ -61,12 +63,6 @@ performance guidance.
 
 Dask-specific FAQ examples and notes, including local clusters, distributed
 clusters, task graphs, arrays, dataframes, and scheduler behavior.
-
-Current examples:
-
-| Question | Notebook |
-|----------|----------|
-| How do I do a quick look at memory usage for optimising? | [performance/dask/memory_usage.ipynb](performance/dask/memory_usage.ipynb) |
 
 ### `performance/pyspark/`
 
