@@ -62,12 +62,6 @@ performance guidance.
 Dask-specific FAQ examples and notes, including local clusters, distributed
 clusters, task graphs, arrays, dataframes, and scheduler behavior.
 
-Current examples:
-
-| Question | Notebook |
-|----------|----------|
-| How do I do a quick look at memory usage for optimising? | [performance/dask/memory_usage.ipynb](performance/dask/memory_usage.ipynb) |
-
 ### `performance/pyspark/`
 
 PySpark-specific FAQ examples and notes, including Spark sessions, dataframe
