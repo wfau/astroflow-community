@@ -36,9 +36,11 @@ notebook or example that answers it.
 ├── performance/
 │   ├── README.md
 │   ├── dask/
+│   │   ├── code_on_workers.ipynb
 │   │   ├── README.md
 │   │   └── memory_usage.ipynb
 │   └── pyspark/
+│       ├── code_on_workers.ipynb
 │       └── README.md
 ├── science/
 │   └── README.md

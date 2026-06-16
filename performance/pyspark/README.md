@@ -23,4 +23,4 @@ outputs.
 
 | Question | Notebook |
 |----------|----------|
-| How do I set up a small PySpark performance example? | Contributions welcome |
+| How do I deploy code and packages to PySpark executors? | [code_on_workers.ipynb](code_on_workers.ipynb) |

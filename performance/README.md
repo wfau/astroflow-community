@@ -28,4 +28,3 @@ live directly under `performance/`.
 | Question | Notebook |
 |----------|----------|
 | How should I choose between pyspark and dask? | |
-
