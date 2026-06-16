@@ -3,6 +3,9 @@
 This directory is for examples that connect AstroFlow with large language
 models, agents, retrieval systems, or AI-supported scientific workflows.
 
+Since AstroFlow inherently works inside JupyterHub notebooks hosted on remote servers,
+we require some extra glue code to make LLMs work.
+
 Use this area for examples such as:
 
 - Using an LLM to help assemble or inspect distributed workflows.
@@ -23,4 +26,8 @@ configuration required to run it.
 
 | Question | Notebook |
 |----------|----------|
-| How can AstroFlow examples use LLMs responsibly and reproducibly? | Contributions welcome |
+| What if I have an OpenAI API key? |  |
+
+## OpenAI integration
+
+The University of Edinburgh provides API keys for OpenAI, but under zero data retention (ZDR) policies, which means we require helpers to make persistence in conversational memory.
