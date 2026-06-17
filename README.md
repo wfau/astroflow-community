@@ -9,6 +9,8 @@ distributed approaches to scientific computing. It starts as a small skeleton:
 a few themed areas where FAQ-style examples can live, with enough structure to
 make contributions easy to find and review.
 
+If you are looking for a place to ask questions, please use the [discussions page](https://github.com/wfau/astroflow-community/discussions).
+
 ## What This Repository Is For
 
 Use this repository to share practical answers to common questions, backed by
@@ -77,9 +79,22 @@ adapt AstroFlow to their own work.
 
 ## Contributing Examples
 
-We are actively soliciting contributions as pull requests. A good PR should add
+We are actively soliciting contributions as pull requests -- see, e.g. [PR 1](https://github.com/wfau/astroflow-community/pull/1). A good PR should add
 or update a question in the relevant directory README and include a notebook or
 small example that answers it.
+
+In detail, the workflow to add a PR is to make a new branch in your local copy of `astroflow-community`,
+```
+git branch my-new-feature
+```
+then add your changes and commit
+```
+git add .
+git commit -m 'my new feature does X'
+git push
+```
+
+You may also contribute via file upload through the GitHub interface.
 
 ### Adding to FAQs
 
