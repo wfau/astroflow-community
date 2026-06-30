@@ -25,3 +25,4 @@ the example README.
 |----------|----------|
 | How do I do a quick look at memory usage for optimising? | [memory_usage.ipynb](memory_usage.ipynb) |
 | How do I get custom code onto the workers? | [code_on_workers.ipynb](code_on_workers.ipynb) |
+| How do I rasterize 2D point data with Dask partitions? | [rasterizer.ipynb](rasterizer.ipynb) |

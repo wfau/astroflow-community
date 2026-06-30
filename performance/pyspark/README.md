@@ -24,3 +24,4 @@ outputs.
 | Question | Notebook |
 |----------|----------|
 | How do I deploy code and packages to PySpark executors? | [code_on_workers.ipynb](code_on_workers.ipynb) |
+| How do I rasterize 2D point data with a PySpark UDF? | [rasterizer.ipynb](rasterizer.ipynb) |
