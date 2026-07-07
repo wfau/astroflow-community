@@ -23,5 +23,6 @@ outputs.
 
 | Question | Notebook |
 |----------|----------|
+| What is available on the Spark server I connected to? | [lay_of_the_land.ipynb](lay_of_the_land.ipynb) |
 | How do I deploy code and packages to PySpark executors? | [code_on_workers.ipynb](code_on_workers.ipynb) |
 | How do I rasterize 2D point data with a PySpark UDF? | [rasterizer.ipynb](rasterizer.ipynb) |

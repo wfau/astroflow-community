@@ -77,6 +77,23 @@ Domain-oriented FAQ examples. These should show meaningful workflows, datasets,
 analysis patterns, or reproducible research tasks that can help other scientists
 adapt AstroFlow to their own work.
 
+## Getting a Copy on a Server
+
+From a shell on the server where you want to run the examples, clone the
+repository and move into it:
+
+```bash
+git clone https://github.com/wfau/astroflow-community.git
+cd astroflow-community
+```
+
+If your server is already set up with GitHub SSH keys, the SSH form works too:
+
+```bash
+git clone git@github.com:wfau/astroflow-community.git
+cd astroflow-community
+```
+
 ## Contributing Examples
 
 We are actively soliciting contributions as pull requests -- see, e.g. [PR 1](https://github.com/wfau/astroflow-community/pull/1). A good PR should add
