@@ -23,13 +23,15 @@ Prefer public datasets, small fixtures, or scripts that generate synthetic data.
 If a workflow uses restricted data, provide a public or synthetic substitute so
 the example remains useful to the community.
 
-The current examples include a notebook for adding the Rybizki Gaia fidelity
-catalog and cross-matching it to a filtered Gaia DR3 RVS sample. It shows the
-data download, Dask-based table construction, Gaia source filtering, and a
-simple percentile check for the `fidelity_v2 = 0.5` threshold.
+The current examples include notebooks for working with Gaia-scale data:
+adding the Rybizki Gaia fidelity catalog and cross-matching it to a filtered
+Gaia DR3 RVS sample, and counting Gaia quantities with Spark SQL. Together they
+show distributed table construction, Gaia source filtering, binned catalog
+summaries, and quick checks of thresholds or selection functions.
 
 ## FAQ
 
 | Question | Notebook |
 |----------|----------|
 | How do I add the Rybizki fidelity dataset and cross-match it to Gaia RVS? | [add_Rybizki_dataset.ipynb](add_Rybizki_dataset.ipynb) |
+| How do I count Gaia source quantities by magnitude with Spark SQL? | [counting_gaia_quantities.ipynb](counting_gaia_quantities.ipynb) |
