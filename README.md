@@ -31,24 +31,6 @@ notebook or example that answers it.
 
 ## Repository Structure
 
-```text
-.
-├── llm/
-│   └── README.md
-├── performance/
-│   ├── README.md
-│   ├── dask/
-│   │   ├── code_on_workers.ipynb
-│   │   ├── README.md
-│   │   └── memory_usage.ipynb
-│   └── pyspark/
-│       ├── code_on_workers.ipynb
-│       └── README.md
-├── science/
-│   └── README.md
-└── README.md
-```
-
 ### `llm/`
 
 FAQ-style examples that explore how AstroFlow can be used with large language
@@ -94,22 +76,38 @@ git clone git@github.com:wfau/astroflow-community.git
 cd astroflow-community
 ```
 
+If you plan to contribute examples, first
+[fork the repository](https://github.com/wfau/astroflow-community/fork), then
+clone your fork by replacing `YOUR-USERNAME` below:
+
+```bash
+git clone git@github.com:YOUR-USERNAME/astroflow-community.git
+cd astroflow-community
+```
+
 ## Contributing Examples
 
-We are actively soliciting contributions as pull requests -- see, e.g. [PR 1](https://github.com/wfau/astroflow-community/pull/1). A good PR should add
-or update a question in the relevant directory README and include a notebook or
-small example that answers it.
+We actively welcome contributions as pull requests; see, for example,
+[PR 1](https://github.com/wfau/astroflow-community/pull/1). A good pull request
+should add or update a question in the relevant directory README and include a
+notebook or small example that answers it.
 
-In detail, the workflow to add a PR is to make a new branch in your local copy of `astroflow-community`,
+Create and switch to a feature branch in your local clone:
+
+```bash
+git switch -c my-new-feature
 ```
-git branch my-new-feature
-```
-then add your changes and commit
-```
+
+Add and commit your changes, then push the branch to your fork:
+
+```bash
 git add .
-git commit -m 'my new feature does X'
-git push
+git commit -m "Add an example of X"
+git push -u origin my-new-feature
 ```
+
+Finally, visit your fork on GitHub and select **Compare & pull request** to open
+a pull request against `wfau/astroflow-community`.
 
 You may also contribute via file upload through the GitHub interface.
 
@@ -139,22 +137,6 @@ When adding an example, prefer a small subdirectory with its own `README.md`.
 That local README should explain the purpose, requirements, how to run it, and
 what output to expect.
 
-#### Suggested Example Layout
-
-```text
-example-name/
-├── README.md
-├── requirements.txt        # or environment.yml / pyproject.toml
-├── data/                   # optional; prefer small or generated data
-├── notebooks/              # optional
-├── src/                    # optional
-└── outputs/                # optional; keep generated outputs small
-```
-
-Large datasets, generated artifacts, credentials, and machine-specific files
-should not be committed. Link to external data sources or provide scripts that
-create small synthetic fixtures.
-
 ## Community Guidelines
 
 Please use the discussion space generously:
@@ -168,8 +150,31 @@ This repository should be useful to people with different levels of experience,
 from first-time users to experts comparing distributed execution backends. Clear
 explanations, small examples, and honest notes about limitations are all valued.
 
-## Status
 
-This repository is currently a starting point. The directory structure is here
-to make the first wave of contributions easier to organize, and the conventions
-will evolve as the community adds real examples.
+## Full Repository Structure
+
+```text
+.
+├── llm/
+│   ├── README.md
+│   └── openai/
+│       └── research_assistant.py
+├── performance/
+│   ├── README.md
+│   ├── dask/
+│   │   ├── README.md
+│   │   ├── code_on_workers.ipynb
+│   │   ├── lay_of_the_land.ipynb
+│   │   ├── memory_usage.ipynb
+│   │   └── rasterizer.ipynb
+│   └── pyspark/
+│       ├── README.md
+│       ├── code_on_workers.ipynb
+│       ├── lay_of_the_land.ipynb
+│       └── rasterizer.ipynb
+├── science/
+│   ├── README.md
+│   ├── add_Rybizki_dataset.ipynb
+│   └── counting_gaia_quantities.ipynb
+└── README.md
+```
