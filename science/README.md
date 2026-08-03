@@ -24,14 +24,16 @@ If a workflow uses restricted data, provide a public or synthetic substitute so
 the example remains useful to the community.
 
 The current examples include notebooks for working with Gaia-scale data:
-adding the Rybizki Gaia fidelity catalog and cross-matching it to a filtered
-Gaia DR3 RVS sample, and counting Gaia quantities with Spark SQL. Together they
-show distributed table construction, Gaia source filtering, binned catalog
-summaries, and quick checks of thresholds or selection functions.
+adding the Rybizki Gaia fidelity catalog, comparing Gaia inverse-parallax
+distances with Bailer-Jones photogeometric distances, and counting Gaia
+quantities with Spark SQL. Together they show distributed table construction,
+catalog cross-matching, Gaia source filtering, parallax zero-point correction,
+binned summaries, and checks of thresholds or selection functions.
 
 ## FAQ
 
 | Question | Notebook |
 |----------|----------|
 | How do I add the Rybizki fidelity dataset and cross-match it to Gaia RVS? | [add_Rybizki_dataset.ipynb](add_Rybizki_dataset.ipynb) |
+| How do Gaia inverse-parallax distances compare with Bailer-Jones photogeometric distances? | [compare_parallax_BailerJones.ipynb](compare_parallax_BailerJones.ipynb) |
 | How do I count Gaia source quantities by magnitude with Spark SQL? | [counting_gaia_quantities.ipynb](counting_gaia_quantities.ipynb) |
