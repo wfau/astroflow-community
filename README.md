@@ -78,12 +78,15 @@ cd astroflow-community
 
 If you plan to contribute examples, first
 [fork the repository](https://github.com/wfau/astroflow-community/fork), then
-clone your fork by replacing `YOUR-USERNAME` below:
+clone your fork (instead of the upstream repo above) by replacing `YOUR-USERNAME` below:
 
-```bash
-git clone git@github.com:YOUR-USERNAME/astroflow-community.git
-cd astroflow-community
-```
+    git clone https://github.com/YOUR-USERNAME/astroflow-community.git
+    cd astroflow-community
+
+If your server is already set up with GitHub SSH keys, the SSH form works too:
+
+    git clone git@github.com:YOUR-USERNAME/astroflow-community.git
+    cd astroflow-community
 
 ## Contributing Examples
 
