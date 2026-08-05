@@ -20,20 +20,6 @@ Backend-specific examples should usually go in one of the subdirectories:
 - `dask/` for Dask-based examples.
 - `pyspark/` for PySpark-based examples.
 
-General performance guidance, cross-backend comparisons, and shared fixtures can
-live directly under `performance/`.
-
-## FAQ
-
-| Backend | Question | Notebook |
-|---------|----------|----------|
-| Dask | What is available on the Dask server I connected to? | [dask/lay_of_the_land.ipynb](dask/lay_of_the_land.ipynb) |
-| Dask | How do I get custom code onto Dask workers? | [dask/code_on_workers.ipynb](dask/code_on_workers.ipynb) |
-| Dask | How can I measure memory use and choose a partition size? | [dask/memory_usage.ipynb](dask/memory_usage.ipynb) |
-| Dask | How do I rasterize 2D point data with Dask partitions? | [dask/rasterizer.ipynb](dask/rasterizer.ipynb) |
-| PySpark | What is available on the Spark server I connected to? | [pyspark/lay_of_the_land.ipynb](pyspark/lay_of_the_land.ipynb) |
-| PySpark | How do I deploy code and packages to Spark executors? | [pyspark/code_on_workers.ipynb](pyspark/code_on_workers.ipynb) |
-| PySpark | How do I rasterize 2D point data with a PySpark UDF? | [pyspark/rasterizer.ipynb](pyspark/rasterizer.ipynb) |
 
 ## How should I choose between PySpark and Dask?
 
@@ -71,7 +57,20 @@ and [data-source documentation](https://spark.apache.org/docs/latest/sql-data-so
   cluster. Avoid deciding from a small local microbenchmark alone.
 
 The paired `lay_of_the_land`, `code_on_workers`, and `rasterizer` notebooks in
-this repository are useful starting points because they expose equivalent
+this repository (see below) are useful starting points because they expose equivalent
 deployment concerns in both backends. The Dask memory notebook adds a concrete
 workflow for measuring memory and translating that measurement into partition
 sizing.
+
+
+## FAQ
+
+| Backend | Question | Notebook |
+|---------|----------|----------|
+| Dask | What is available on the Dask server I connected to? | [dask/lay_of_the_land.ipynb](dask/lay_of_the_land.ipynb) |
+| Dask | How do I get custom code onto Dask workers? | [dask/code_on_workers.ipynb](dask/code_on_workers.ipynb) |
+| Dask | How can I measure memory use and choose a partition size? | [dask/memory_usage.ipynb](dask/memory_usage.ipynb) |
+| Dask | How do I rasterize 2D point data with Dask partitions? | [dask/rasterizer.ipynb](dask/rasterizer.ipynb) |
+| PySpark | What is available on the Spark server I connected to? | [pyspark/lay_of_the_land.ipynb](pyspark/lay_of_the_land.ipynb) |
+| PySpark | How do I deploy code and packages to Spark executors? | [pyspark/code_on_workers.ipynb](pyspark/code_on_workers.ipynb) |
+| PySpark | How do I rasterize 2D point data with a PySpark UDF? | [pyspark/rasterizer.ipynb](pyspark/rasterizer.ipynb) |
