@@ -17,7 +17,7 @@ class MemoryStore:
 
     def __init__(self, directory: str | Path = "memory") -> None:
         self.directory = Path(directory)
-        self.directory.mkdir(exist_ok=True)
+        self.directory.mkdir(parents=True, exist_ok=True)
 
         self.qa_file = self.directory / "qa_log.jsonl"
         self.summary_file = self.directory / "summary.txt"
@@ -72,6 +72,40 @@ class MemoryStore:
 
     def set_summary(self, summary: str) -> None:
         self.summary_file.write_text(summary, encoding="utf-8")
+
+
+def start_new_memory(
+    directory: str | Path = "memory",
+    *,
+    summary: str = "",
+    overwrite: bool = False,
+) -> MemoryStore:
+    """Create a fresh memory store and return it.
+
+    Use overwrite=True to clear an existing qa_log.jsonl and summary.txt.
+    """
+
+    memory_dir = Path(directory)
+    qa_file = memory_dir / "qa_log.jsonl"
+    summary_file = memory_dir / "summary.txt"
+    memory_files = (qa_file, summary_file)
+
+    if memory_dir.exists() and not memory_dir.is_dir():
+        raise NotADirectoryError(f"{memory_dir} exists and is not a directory")
+
+    existing_files = [path for path in memory_files if path.exists()]
+    if existing_files and not overwrite:
+        existing = ", ".join(str(path) for path in existing_files)
+        raise FileExistsError(
+            f"Memory already exists at {memory_dir}: {existing}. "
+            "Pass overwrite=True to start fresh."
+        )
+
+    memory_dir.mkdir(parents=True, exist_ok=True)
+    qa_file.write_text("", encoding="utf-8")
+    summary_file.write_text(summary, encoding="utf-8")
+
+    return MemoryStore(memory_dir)
 
 
 class Retriever:
@@ -258,6 +292,25 @@ class ResearchAssistant:
         self.recent: deque[dict[str, str]] = deque(maxlen=recent_limit)
         self.system_prompt = system_prompt or DEFAULT_SYSTEM_PROMPT
 
+    def start_new_memory(
+        self,
+        memory_dir: str | Path | None = None,
+        *,
+        summary: str = "",
+        overwrite: bool = True,
+    ) -> MemoryStore:
+        """Start using a fresh memory store for this assistant."""
+
+        self.memory = start_new_memory(
+            self.memory.directory if memory_dir is None else memory_dir,
+            summary=summary,
+            overwrite=overwrite,
+        )
+        self.retriever = Retriever(self.memory)
+        self.recent.clear()
+
+        return self.memory
+
     def ask(
         self,
         question: str,
@@ -348,10 +401,10 @@ Assume familiarity with:
 - NumPy
 - Dask
 - pandas
-- galactic dynamics
-- simulations
+- PySpark (custom, with astroflow_spark_gaia import spark, and then spark.sql())
+- gaia data (specifically Gaia DR3)
 
-Prefer concise, runnable solutions.
+Prefer concise, runnable Python code.
 """.strip()
 
 
