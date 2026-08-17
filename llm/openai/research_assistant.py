@@ -93,6 +93,12 @@ def start_new_memory(
     if memory_dir.exists() and not memory_dir.is_dir():
         raise NotADirectoryError(f"{memory_dir} exists and is not a directory")
 
+    for path in memory_files:
+        if path.is_symlink():
+            raise OSError(f"Refusing to write memory file via symlink: {path}")
+        if path.exists() and not path.is_file():
+            raise OSError(f"{path} exists and is not a regular file")
+
     existing_files = [path for path in memory_files if path.exists()]
     if existing_files and not overwrite:
         existing = ", ".join(str(path) for path in existing_files)
@@ -296,9 +302,7 @@ class ResearchAssistant:
         self,
         memory_dir: str | Path | None = None,
         *,
-        summary: str = "",
-        overwrite: bool = True,
-    ) -> MemoryStore:
+        overwrite: bool = False,
         """Start using a fresh memory store for this assistant."""
 
         self.memory = start_new_memory(
