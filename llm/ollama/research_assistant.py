@@ -1,13 +1,11 @@
-"""Importable research assistant utilities extracted from ResearchAssistant.ipynb."""
+"""Importable research assistant utilities backed by a local Ollama server."""
 
 from __future__ import annotations
 
 from collections import Counter, deque
 import json
-import os
 from pathlib import Path
 import re
-import subprocess
 import time
 from typing import Any
 
@@ -92,12 +90,6 @@ def start_new_memory(
 
     if memory_dir.exists() and not memory_dir.is_dir():
         raise NotADirectoryError(f"{memory_dir} exists and is not a directory")
-
-    for path in memory_files:
-        if path.is_symlink():
-            raise OSError(f"Refusing to write memory file via symlink: {path}")
-        if path.exists() and not path.is_file():
-            raise OSError(f"{path} exists and is not a regular file")
 
     existing_files = [path for path in memory_files if path.exists()]
     if existing_files and not overwrite:
@@ -187,7 +179,7 @@ def build_messages(
     recent: list[dict[str, str]],
     question: str,
 ) -> list[dict[str, str]]:
-    """Build the message list sent to the OpenAI API."""
+    """Build the message list sent to the Ollama API."""
 
     messages = [
         {
@@ -241,45 +233,12 @@ Assistant:
     return messages
 
 
-def load_openai_api_key_from_shell_file(
-    path: str | Path = "openai_key.txt",
-    *,
-    env_var: str = "OPENAI_API_KEY",
-) -> str:
-    """Load OPENAI_API_KEY from a shell-style export file into this Python process."""
-
-    key_file = Path(path)
-    if not key_file.exists():
-        raise FileNotFoundError(f"Could not find {key_file}")
-
-    result = subprocess.run(
-        [
-            "sh",
-            "-c",
-            '. "$1" && eval "printf %s \\"\\$$2\\""',
-            "load_openai_api_key_from_shell_file",
-            str(key_file),
-            env_var,
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-
-    api_key = result.stdout.strip()
-    if not api_key:
-        raise ValueError(f"{env_var} was not set by {key_file}")
-
-    os.environ[env_var] = api_key
-    return api_key
-
-
 class ResearchAssistant:
     """Research assistant with persistent memory and lightweight retrieval."""
 
     def __init__(
         self,
-        model: str = "gpt-5-nano",
+        model: str = "llama3.2",
         memory_dir: str | Path = "memory",
         *,
         client: Any | None = None,
@@ -287,9 +246,9 @@ class ResearchAssistant:
         recent_limit: int = 10,
     ) -> None:
         if client is None:
-            from openai import OpenAI
+            from ollama import Client
 
-            client = OpenAI()
+            client = Client()
 
         self.client = client
         self.model = model
@@ -297,31 +256,13 @@ class ResearchAssistant:
         self.retriever = Retriever(self.memory)
         self.recent: deque[dict[str, str]] = deque(maxlen=recent_limit)
         self.system_prompt = system_prompt or DEFAULT_SYSTEM_PROMPT
-        self.input_tokens = 0
-        self.output_tokens = 0
-
-    @property
-    def total_tokens(self) -> int:
-        """Return the total number of input and output tokens used so far."""
-
-        return self.input_tokens + self.output_tokens
-
-    def _track_token_usage(self, response: Any) -> None:
-        """Add token usage from an OpenAI Chat Completions response."""
-
-        usage = getattr(response, "usage", None)
-        if usage is None:
-            return
-
-        self.input_tokens += usage.prompt_tokens
-        self.output_tokens += usage.completion_tokens
 
     def start_new_memory(
         self,
         memory_dir: str | Path | None = None,
         *,
         summary: str = "",
-        overwrite: bool = False,
+        overwrite: bool = True,
     ) -> MemoryStore:
         """Start using a fresh memory store for this assistant."""
 
@@ -353,13 +294,12 @@ class ResearchAssistant:
             question,
         )
 
-        response = self.client.chat.completions.create(
+        response = self.client.chat(
             model=self.model,
             messages=messages,
         )
-        self._track_token_usage(response)
 
-        answer = response.choices[0].message.content
+        answer = _response_content(response)
 
         self.recent.append({"role": "user", "content": question})
         self.recent.append({"role": "assistant", "content": answer})
@@ -393,7 +333,7 @@ Assistant:
             for record in records
         )
 
-        response = self.client.chat.completions.create(
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {
@@ -410,9 +350,8 @@ Assistant:
                 },
             ],
         )
-        self._track_token_usage(response)
 
-        summary = response.choices[0].message.content
+        summary = _response_content(response)
         self.memory.set_summary(summary)
 
         return summary
@@ -436,3 +375,16 @@ Prefer concise, runnable Python code.
 
 def _tokens(text: str) -> list[str]:
     return re.findall(r"[a-z0-9_]+", text.lower())
+
+
+def _response_content(response: Any) -> str:
+    """Read content from both Ollama response objects and plain mappings."""
+
+    if isinstance(response, dict):
+        return response["message"]["content"]
+
+    message = response.message
+    if isinstance(message, dict):
+        return message["content"]
+
+    return message.content
