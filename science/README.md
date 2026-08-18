@@ -36,7 +36,8 @@ binned summaries, and checks of thresholds or selection functions.
 |----------|----------|
 | How do I add the Rybizki fidelity dataset and cross-match it to Gaia RVS? | [add_Rybizki_dataset.ipynb](add_Rybizki_dataset.ipynb) |
 | How do Gaia inverse-parallax distances compare with Bailer-Jones photogeometric distances? | [compare_parallax_BailerJones.ipynb](compare_parallax_BailerJones.ipynb) |
-| How do I count Gaia source quantities by magnitude with Spark SQL? | [counting_gaia_quantities.ipynb](counting_gaia_quantities.ipynb) |
+| How do I count Gaia source quantities by magnitude with Spark SQL? | [rvs_dr4_predictions.ipynb](rvs_dr4_predictions.ipynb) |
+| What might the distribution of RVS sources be in DR4? | [rvs_dr4_predictions.ipynb](rvs_dr4_predictions.ipynb) |
 
 ## Comparing parallaxes with Bailer-Jones distances
 
